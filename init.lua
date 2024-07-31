@@ -190,9 +190,15 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- Custom keybinds
 vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save buffer' })
 vim.keymap.set('n', 'H', ':bp<CR>', { desc = 'Previous buffer' })
 vim.keymap.set('n', 'L', ':bn<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<leader>x', ':bd<CR>', { desc = 'Delete buffer' })
+vim.keymap.set('i', '<C-e>', '<C-o>$', { desc = 'Go to end of the line' })
+vim.keymap.set('i', '<C-a>', '<C-o>0', { desc = 'Go to beginning of the line' })
+vim.keymap.set('n', 'th', ':lcd %:p:h<CR>:sp<CR><C-w><C-w>:set nonu<CR>:te<CR>i', { desc = 'Open terminal in horizontal split' })
+vim.keymap.set('n', 'tv', ':lcd %:p:h<CR>:vs<CR><C-w><C-w>:set nonu<CR>:te<CR>i', { desc = 'Open terminal in vertical split' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -893,7 +899,7 @@ require('lazy').setup({
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
   require 'kickstart.plugins.debug',
-  require 'kickstart.plugins.indent_line',
+  -- require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
