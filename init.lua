@@ -217,6 +217,7 @@ vim.keymap.set('i', '<C-e>', '<C-o>$', { desc = 'Go to end of the line' })
 vim.keymap.set('i', '<C-a>', '<C-o>0', { desc = 'Go to beginning of the line' })
 vim.keymap.set('n', 'th', ':lcd %:p:h<CR>:sp<CR><C-w><C-w>:set nonu<CR>:te<CR>i', { desc = 'Open terminal in horizontal split' })
 vim.keymap.set('n', 'tv', ':lcd %:p:h<CR>:vs<CR><C-w><C-w>:set nonu<CR>:te<CR>i', { desc = 'Open terminal in vertical split' })
+vim.keymap.set('n', '<leader>n', ':Neotree reveal<CR>', { desc = 'Open Neotree' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
