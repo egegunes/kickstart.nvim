@@ -22,59 +22,59 @@
 
 What is Kickstart?
 
-  Kickstart.nvim is *not* a distribution.
+Kickstart.nvim is *not* a distribution.
 
-  Kickstart.nvim is a starting point for your own configuration.
-    The goal is that you can read every line of code, top-to-bottom, understand
-    what your configuration is doing, and modify it to suit your needs.
+Kickstart.nvim is a starting point for your own configuration.
+  The goal is that you can read every line of code, top-to-bottom, understand
+  what your configuration is doing, and modify it to suit your needs.
 
-    Once you've done that, you can start exploring, configuring and tinkering to
-    make Neovim your own! That might mean leaving Kickstart just the way it is for a while
-    or immediately breaking it into modular pieces. It's up to you!
+  Once you've done that, you can start exploring, configuring and tinkering to
+  make Neovim your own! That might mean leaving Kickstart just the way it is for a while
+  or immediately breaking it into modular pieces. It's up to you!
 
-    If you don't know anything about Lua, I recommend taking some time to read through
-    a guide. One possible example which will only take 10-15 minutes:
-      - https://learnxinyminutes.com/docs/lua/
+  If you don't know anything about Lua, I recommend taking some time to read through
+  a guide. One possible example which will only take 10-15 minutes:
+    - https://learnxinyminutes.com/docs/lua/
 
-    After understanding a bit more about Lua, you can use `:help lua-guide` as a
-    reference for how Neovim integrates Lua.
-    - :help lua-guide
-    - (or HTML version): https://neovim.io/doc/user/lua-guide.html
+  After understanding a bit more about Lua, you can use `:help lua-guide` as a
+  reference for how Neovim integrates Lua.
+  - :help lua-guide
+  - (or HTML version): https://neovim.io/doc/user/lua-guide.html
 
 Kickstart Guide:
 
-  TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
+TODO: The very first thing you should do is to run the command `:Tutor` in Neovim.
 
-    If you don't know what this means, type the following:
-      - <escape key>
-      - :
-      - Tutor
-      - <enter key>
+  If you don't know what this means, type the following:
+    - <escape key>
+    - :
+    - Tutor
+    - <enter key>
 
-    (If you already know the Neovim basics, you can skip this step.)
+  (If you already know the Neovim basics, you can skip this step.)
 
-  Once you've completed that, you can continue working through **AND READING** the rest
-  of the kickstart init.lua.
+Once you've completed that, you can continue working through **AND READING** the rest
+of the kickstart init.lua.
 
-  Next, run AND READ `:help`.
-    This will open up a help window with some basic information
-    about reading, navigating and searching the builtin help documentation.
+Next, run AND READ `:help`.
+  This will open up a help window with some basic information
+  about reading, navigating and searching the builtin help documentation.
 
-    This should be the first place you go to look when you're stuck or confused
-    with something. It's one of my favorite Neovim features.
+  This should be the first place you go to look when you're stuck or confused
+  with something. It's one of my favorite Neovim features.
 
-    MOST IMPORTANTLY, we provide a keymap "<space>sh" to [s]earch the [h]elp documentation,
-    which is very useful when you're not exactly sure of what you're looking for.
+  MOST IMPORTANTLY, we provide a keymap "<space>sh" to [s]earch the [h]elp documentation,
+  which is very useful when you're not exactly sure of what you're looking for.
 
-  I have left several `:help X` comments throughout the init.lua
-    These are hints about where to find more information about the relevant settings,
-    plugins or Neovim features used in Kickstart.
+I have left several `:help X` comments throughout the init.lua
+  These are hints about where to find more information about the relevant settings,
+  plugins or Neovim features used in Kickstart.
 
-   NOTE: Look for lines like this
+ NOTE: Look for lines like this
 
-    Throughout the file. These are for you, the reader, to help you understand what is happening.
-    Feel free to delete them once you know what you're doing, but they should serve as a guide
-    for when you are first encountering a few different constructs in your Neovim config.
+  Throughout the file. These are for you, the reader, to help you understand what is happening.
+  Feel free to delete them once you know what you're doing, but they should serve as a guide
+  for when you are first encountering a few different constructs in your Neovim config.
 
 If you experience any errors while trying to install kickstart, run `:checkhealth` for more info.
 
@@ -217,8 +217,7 @@ vim.keymap.set('i', '<C-e>', '<C-o>$', { desc = 'Go to end of the line' })
 vim.keymap.set('i', '<C-a>', '<C-o>0', { desc = 'Go to beginning of the line' })
 vim.keymap.set('n', 'th', ':lcd %:p:h<CR>:sp<CR><C-w><C-w>:set nonu<CR>:te<CR>i', { desc = 'Open terminal in horizontal split' })
 vim.keymap.set('n', 'tv', ':lcd %:p:h<CR>:vs<CR><C-w><C-w>:set nonu<CR>:te<CR>i', { desc = 'Open terminal in vertical split' })
-vim.keymap.set('n', '<leader>n', ':Neotree reveal<CR>', { desc = 'Open Neotree' })
-vim.keymap.set('n', '<C-p>', ':b#<CR>', { desc = 'Jump to last buffer' })
+vim.keymap.set('n', '<C-l>', ':b#<CR>', { desc = 'Jump to last buffer' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -263,6 +262,50 @@ rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  {
+    'yetone/avante.nvim',
+    event = 'VeryLazy',
+    lazy = false,
+    version = false, -- set this if you want to always pull the latest change
+    opts = {
+      -- add any opts here
+    },
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = 'make',
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'stevearc/dressing.nvim',
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
+      'nvim-tree/nvim-web-devicons', -- or echasnovski/mini.icons
+      {
+        -- support for image pasting
+        'HakonHarnes/img-clip.nvim',
+        event = 'VeryLazy',
+        opts = {
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+            -- required for Windows users
+            use_absolute_path = true,
+          },
+        },
+      },
+      -- {
+      --   -- Make sure to set this up properly if you have lazy=true
+      --   'MeanderingProgrammer/render-markdown.nvim',
+      --   opts = {
+      --     file_types = { 'markdown', 'Avante' },
+      --   },
+      --   ft = { 'markdown', 'Avante' },
+      -- },
+    },
+  },
   {
     'rmagatti/auto-session',
     dependencies = {
@@ -428,16 +471,15 @@ require('lazy').setup({
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
-      local extensions = require('telescope').extensions
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<C-P>', builtin.find_files, { desc = '[S]earch [F]iles' })
 
-      vim.keymap.set('n', '<leader>sf', function()
+      vim.keymap.set('n', '<leader><leader>', function()
         builtin.buffers {
           sort_lastused = true,
         }
@@ -457,6 +499,8 @@ require('lazy').setup({
         ":lua require('telescope').extensions.live_grep_args.live_grep_args({ cwd = vim.fn.expand('%:p:h') })<CR>",
         { noremap = true, silent = true }
       )
+
+      vim.keymap.set('n', '<leader>qw', builtin.diagnostics, { desc = 'Workspace diagnostics' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -698,7 +742,6 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -708,6 +751,44 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
+        --
+        --
+
+        pylsp = {
+          settings = {
+            pylsp = {
+              plugins = {
+                pylsp_mypy = {
+                  live_mode = false,
+                  report_progress = true,
+                },
+              },
+            },
+          },
+        },
+
+        -- pyright = {
+        --   settings = {
+        --     pyright = {
+        --       autoImportCompletion = true,
+        --       -- Using Ruff's import organizer
+        --       disableOrganizeImports = true,
+        --     },
+        --     python = {
+        --       analysis = {
+        --         ignore = { path = '*' },
+        --       },
+        --     },
+        --   },
+        -- },
+
+        ruff_lsp = {
+          init_options = {
+            settings = {
+              args = {},
+            },
+          },
+        },
 
         lua_ls = {
           -- cmd = { ... },
