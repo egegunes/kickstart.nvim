@@ -263,6 +263,15 @@ require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
   {
+    'ThePrimeagen/git-worktree.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim' },
+    config = function()
+      require('git-worktree').setup()
+      require('telescope').load_extension 'git_worktree'
+    end,
+  },
+  { 'akinsho/git-conflict.nvim', version = '*', config = true },
+  {
     'yetone/avante.nvim',
     event = 'VeryLazy',
     lazy = false,
@@ -524,6 +533,14 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+
+      vim.keymap.set('n', '<leader>wt', function()
+        require('telescope').extensions.git_worktree.git_worktrees()
+      end, { desc = 'Search Git Worktrees' })
+
+      vim.keymap.set('n', '<leader>wc', function()
+        require('telescope').extensions.git_worktree.create_git_worktree()
+      end, { desc = 'Create Git Worktree' })
     end,
   },
 
