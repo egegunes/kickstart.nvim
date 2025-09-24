@@ -783,7 +783,6 @@ require('lazy').setup({
       local lspconfig = require 'lspconfig'
 
       lspconfig.gopls.setup {
-        on_attach = on_attach,
         capabilities = capabilities,
         settings = {
           gopls = {
@@ -798,7 +797,6 @@ require('lazy').setup({
 
       lspconfig.lua_ls.setup {
         capabilities = capabilities,
-        on_attach = on_attach,
         on_init = function(client)
           if client.workspace_folders then
             local path = client.workspace_folders[1].name
